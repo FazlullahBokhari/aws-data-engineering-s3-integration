@@ -1,0 +1,21 @@
+aws:
+  bucket: faiz-de-data-lake
+  region: eu-north-1
+
+paths:
+  raw_orders: raw/orders
+  clean_orders: clean/orders
+
+spark:
+  app_name: CleanOrdersJob
+  master: local[*]
+  shuffle_partitions: 4
+  adaptive_enabled: true
+  partition_column: order_date
+
+  jars_packages:
+    - org.apache.hadoop:hadoop-aws:3.3.4
+    - com.amazonaws:aws-java-sdk-bundle:1.12.540
+
+  hadoop:
+    fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
