@@ -15,3 +15,24 @@
 python3.10 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
+
+## docker commands
+```
+build the app: docker build -t data-engineering-pipeline .
+
+run app: docker run --rm -it `
+   --env-file "C:/Users/fazlu/aws-secrets/aws.env" `                                                                                                                              
+   -v "C:/Users/fazlu/.ivy2:/root/.ivy2" `                                                                                                                                        
+   -v "C:/Users/fazlu/Downloads/Data-Engineering-projects/aws-data-engineering-level1:/app" `                                                                                     
+   -w /app `                                                                                                                                                                      
+   pyspark-local:latest `                                                                                                                                                         
+  python3 -m spark_jobs.clean_orders_job    
+
+create order:  docker run --rm -it `
+   -v "C:/Users/fazlu/Downloads/Data-Engineering-projects/aws-data-engineering-level1:/app" `                                                                                     
+   -w /app `                                                                                                                                                                      
+   pyspark-local:latest `                                                                                                                                                         
+   python3 ingestion/generate_orders.py --num_records 1000000
+```
+
