@@ -21,7 +21,20 @@ pip install -r requirements.txt
 ```
 build the app: docker build -t data-engineering-pipeline .
 
-run app: docker run --rm -it `
+generate orders: docker run --rm -it `
+   -v "C:/Users/fazlu/Downloads/Data-Engineering-projects/aws-data-engineering-level1:/app" `                                                                                     
+   -w /app `                                                                                                                                                                      
+   data-engineering-pipeline `                                                                                                                                                    
+   python3 ingestion/generate_orders.py
+   
+upload to s3: docker run --rm -it `
+   --env-file "C:/Users/fazlu/aws-secrets/aws.env" `                                                                                                                              
+   -v "C:/Users/fazlu/Downloads/Data-Engineering-projects/aws-data-engineering-level1:/app" `                                                                                     
+   -w /app `                                                                                                                                                                      
+   data-engineering-pipeline `                                                                                                                                                    
+   python3 ingestion/upload_to_s3.py
+
+clean and convert to parquet app: docker run --rm -it `
    --env-file "C:/Users/fazlu/aws-secrets/aws.env" `                                                                                                                              
    -v "C:/Users/fazlu/.ivy2:/root/.ivy2" `                                                                                                                                        
    -v "C:/Users/fazlu/Downloads/Data-Engineering-projects/aws-data-engineering-level1:/app" `                                                                                     
